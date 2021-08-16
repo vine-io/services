@@ -1,0 +1,16 @@
+[Unit]
+Description=go.vine.service.apiserver
+After=network.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/vine/apiserver
+EnvironmentFile=-/opt/vine/apiserver/config/apiserver.ini
+ExecStart=/opt/vine/apiserver/bin/apiserver \
+  --server-name=${SERVER_NAME} \
+  --server-address=${SERVER_ADDRESS} \
+Restart=on-failure
+LimitNOFILE=65536
+[Install]
+WantedBy=multi-user.target

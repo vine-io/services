@@ -1,0 +1,24 @@
+[package]
+kind = "cluster"
+namespace = "go.vine"
+
+[[mod]]
+name = "apiserver"
+alias = "go.vine.service.apiserver"
+type = "service"
+version = "latest"
+main = "cmd/apiserver/main.go"
+dir = "github.com/vine-io/services/apiserver"
+output = ""
+flags = [
+	"-a", "-installsuffix", "cgo", "-ldflags \"-s -w\"", 
+]
+
+[[proto]]
+name = "apiserver"
+pb = "github.com/vine-io/services/proto/service/apiserver/v1/apiserver.proto"
+type = "service"
+group = "apiserver"
+version = "v1"
+plugins = ["gogo", "vine", "validator"]
+
