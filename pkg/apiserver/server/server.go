@@ -20,22 +20,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-package apiserver
+package server
 
 import (
-	log "github.com/vine-io/vine/lib/logger"
+	"context"
 
-	"github.com/vine-io/services/pkg/apiserver/server"
+	pb "github.com/vine-io/services/proto/service/apiserver/v1"
+	"google.golang.org/grpc/peer"
 )
 
-func Run() {
-	s := server.New()
+func (s *server) Healthz(ctx context.Context, _ *pb.Empty, _ *pb.Empty) error {
+	return nil
+}
 
-	if err := s.Init(); err != nil {
-		log.Fatal(err)
+func (s *server) GetIP(ctx context.Context, _ *pb.Empty, rsp *pb.IPRsp) error {
+	pr, ok := peer.FromContext(ctx)
+	if ok {
+		rsp.Addr = pr.Addr.String()
 	}
-
-	if err := s.Run(); err != nil {
-		log.Fatal(err)
-	}
+	return nil
 }

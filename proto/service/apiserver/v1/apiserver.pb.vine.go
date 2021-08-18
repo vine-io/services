@@ -30,10 +30,18 @@ const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 func NewApiserverServiceEndpoints() []*apipb.Endpoint {
 	return []*apipb.Endpoint{
 		&apipb.Endpoint{
-			Name:        "ApiserverService.Call",
-			Description: "ApiserverService.Call",
-			Path:        []string{"/apiserver/v1/apiserver/Call"},
-			Method:      []string{"POST"},
+			Name:        "ApiserverService.GetIP",
+			Description: "ApiserverService.GetIP",
+			Path:        []string{"/api/v1/getIP"},
+			Method:      []string{"GET"},
+			Body:        "*",
+			Handler:     "rpc",
+		},
+		&apipb.Endpoint{
+			Name:        "ApiserverService.Healthz",
+			Description: "ApiserverService.Healthz",
+			Path:        []string{"/api/v1/healthz"},
+			Method:      []string{"GET"},
 			Body:        "*",
 			Handler:     "rpc",
 		},
@@ -57,27 +65,37 @@ func NewApiserverServiceOpenAPI() *openapi.OpenAPI {
 			},
 		},
 		Paths: map[string]*openapi.OpenAPIPath{
-			"/apiserver/v1/apiserver/Call": &openapi.OpenAPIPath{
-				Post: &openapi.OpenAPIPathDocs{
+			"/api/v1/getIP": &openapi.OpenAPIPath{
+				Get: &openapi.OpenAPIPathDocs{
 					Tags:        []string{"ApiserverService"},
-					Description: "ApiserverService Call",
-					OperationId: "ApiserverServiceCall",
-					RequestBody: &openapi.PathRequestBody{
-						Description: "Call Request",
-						Content: &openapi.PathRequestBodyContent{
-							ApplicationJson: &openapi.ApplicationContent{
-								Schema: &openapi.Schema{
-									Ref: "#/components/schemas/v1.Request",
-								},
-							},
-						},
-					},
+					Description: "ApiserverService GetIP",
+					OperationId: "ApiserverServiceGetIP",
+					Parameters:  []*openapi.PathParameters{},
 					Responses: map[string]*openapi.PathResponse{
 						"200": &openapi.PathResponse{
 							Description: "successful response (stream response)",
 							Content: &openapi.PathRequestBodyContent{
 								ApplicationJson: &openapi.ApplicationContent{
-									Schema: &openapi.Schema{Ref: "#/components/schemas/v1.Response"},
+									Schema: &openapi.Schema{Ref: "#/components/schemas/v1.IPRsp"},
+								},
+							},
+						},
+					},
+					Security: []*openapi.PathSecurity{},
+				},
+			},
+			"/api/v1/healthz": &openapi.OpenAPIPath{
+				Get: &openapi.OpenAPIPathDocs{
+					Tags:        []string{"ApiserverService"},
+					Description: "ApiserverService Healthz",
+					OperationId: "ApiserverServiceHealthz",
+					Parameters:  []*openapi.PathParameters{},
+					Responses: map[string]*openapi.PathResponse{
+						"200": &openapi.PathResponse{
+							Description: "successful response (stream response)",
+							Content: &openapi.PathRequestBodyContent{
+								ApplicationJson: &openapi.ApplicationContent{
+									Schema: &openapi.Schema{Ref: "#/components/schemas/v1.Empty"},
 								},
 							},
 						},
@@ -89,19 +107,14 @@ func NewApiserverServiceOpenAPI() *openapi.OpenAPI {
 		Components: &openapi.OpenAPIComponents{
 			SecuritySchemes: &openapi.SecuritySchemes{},
 			Schemas: map[string]*openapi.Model{
-				"v1.Request": &openapi.Model{
-					Type: "object",
-					Properties: map[string]*openapi.Schema{
-						"name": &openapi.Schema{
-							Type: "string",
-						},
-					},
-					Required: []string{"name"},
+				"v1.Empty": &openapi.Model{
+					Type:       "object",
+					Properties: map[string]*openapi.Schema{},
 				},
-				"v1.Response": &openapi.Model{
+				"v1.IPRsp": &openapi.Model{
 					Type: "object",
 					Properties: map[string]*openapi.Schema{
-						"msg": &openapi.Schema{
+						"addr": &openapi.Schema{
 							Type: "string",
 						},
 					},
@@ -114,10 +127,10 @@ func NewApiserverServiceOpenAPI() *openapi.OpenAPI {
 // Client API for ApiserverService service
 // +gen:openapi
 type ApiserverService interface {
-	// +gen:post=/apiserver/v1/apiserver/Call
-	Call(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error)
-	Stream(ctx context.Context, in *StreamingRequest, opts ...client.CallOption) (ApiserverService_StreamService, error)
-	PingPong(ctx context.Context, opts ...client.CallOption) (ApiserverService_PingPongService, error)
+	// +gen:get=/api/v1/getIP
+	GetIP(ctx context.Context, in *Empty, opts ...client.CallOption) (*IPRsp, error)
+	// +gen:get=/api/v1/healthz
+	Healthz(ctx context.Context, in *Empty, opts ...client.CallOption) (*Empty, error)
 }
 
 type apiserverService struct {
@@ -132,9 +145,9 @@ func NewApiserverService(name string, c client.Client) ApiserverService {
 	}
 }
 
-func (c *apiserverService) Call(ctx context.Context, in *Request, opts ...client.CallOption) (*Response, error) {
-	req := c.c.NewRequest(c.name, "ApiserverService.Call", in)
-	out := new(Response)
+func (c *apiserverService) GetIP(ctx context.Context, in *Empty, opts ...client.CallOption) (*IPRsp, error) {
+	req := c.c.NewRequest(c.name, "ApiserverService.GetIP", in)
+	out := new(IPRsp)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -142,130 +155,47 @@ func (c *apiserverService) Call(ctx context.Context, in *Request, opts ...client
 	return out, nil
 }
 
-func (c *apiserverService) Stream(ctx context.Context, in *StreamingRequest, opts ...client.CallOption) (ApiserverService_StreamService, error) {
-	req := c.c.NewRequest(c.name, "ApiserverService.Stream", &StreamingRequest{})
-	stream, err := c.c.Stream(ctx, req, opts...)
+func (c *apiserverService) Healthz(ctx context.Context, in *Empty, opts ...client.CallOption) (*Empty, error) {
+	req := c.c.NewRequest(c.name, "ApiserverService.Healthz", in)
+	out := new(Empty)
+	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
 	}
-	if err := stream.Send(in); err != nil {
-		return nil, err
-	}
-	return &apiserverServiceStream{stream}, nil
-}
-
-type ApiserverService_StreamService interface {
-	Context() context.Context
-	SendMsg(interface{}) error
-	RecvMsg(interface{}) error
-	Close() error
-	Recv() (*StreamingResponse, error)
-}
-
-type apiserverServiceStream struct {
-	stream client.Stream
-}
-
-func (x *apiserverServiceStream) Close() error {
-	return x.stream.Close()
-}
-
-func (x *apiserverServiceStream) Context() context.Context {
-	return x.stream.Context()
-}
-
-func (x *apiserverServiceStream) SendMsg(m interface{}) error {
-	return x.stream.Send(m)
-}
-
-func (x *apiserverServiceStream) RecvMsg(m interface{}) error {
-	return x.stream.Recv(m)
-}
-
-func (x *apiserverServiceStream) Recv() (*StreamingResponse, error) {
-	m := new(StreamingResponse)
-	err := x.stream.Recv(m)
-	if err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *apiserverService) PingPong(ctx context.Context, opts ...client.CallOption) (ApiserverService_PingPongService, error) {
-	req := c.c.NewRequest(c.name, "ApiserverService.PingPong", &Ping{})
-	stream, err := c.c.Stream(ctx, req, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &apiserverServicePingPong{stream}, nil
-}
-
-type ApiserverService_PingPongService interface {
-	Context() context.Context
-	SendMsg(interface{}) error
-	RecvMsg(interface{}) error
-	Close() error
-	Send(*Ping) error
-	Recv() (*Pong, error)
-}
-
-type apiserverServicePingPong struct {
-	stream client.Stream
-}
-
-func (x *apiserverServicePingPong) Close() error {
-	return x.stream.Close()
-}
-
-func (x *apiserverServicePingPong) Context() context.Context {
-	return x.stream.Context()
-}
-
-func (x *apiserverServicePingPong) SendMsg(m interface{}) error {
-	return x.stream.Send(m)
-}
-
-func (x *apiserverServicePingPong) RecvMsg(m interface{}) error {
-	return x.stream.Recv(m)
-}
-
-func (x *apiserverServicePingPong) Send(m *Ping) error {
-	return x.stream.Send(m)
-}
-
-func (x *apiserverServicePingPong) Recv() (*Pong, error) {
-	m := new(Pong)
-	err := x.stream.Recv(m)
-	if err != nil {
-		return nil, err
-	}
-	return m, nil
+	return out, nil
 }
 
 // Server API for ApiserverService service
 // +gen:openapi
 type ApiserverServiceHandler interface {
-	// +gen:post=/apiserver/v1/apiserver/Call
-	Call(context.Context, *Request, *Response) error
-	Stream(context.Context, *StreamingRequest, ApiserverService_StreamStream) error
-	PingPong(context.Context, ApiserverService_PingPongStream) error
+	// +gen:get=/api/v1/getIP
+	GetIP(context.Context, *Empty, *IPRsp) error
+	// +gen:get=/api/v1/healthz
+	Healthz(context.Context, *Empty, *Empty) error
 }
 
 func RegisterApiserverServiceHandler(s server.Server, hdlr ApiserverServiceHandler, opts ...server.HandlerOption) error {
 	type apiserverServiceImpl interface {
-		Call(ctx context.Context, in *Request, out *Response) error
-		Stream(ctx context.Context, stream server.Stream) error
-		PingPong(ctx context.Context, stream server.Stream) error
+		GetIP(ctx context.Context, in *Empty, out *IPRsp) error
+		Healthz(ctx context.Context, in *Empty, out *Empty) error
 	}
 	type ApiserverService struct {
 		apiserverServiceImpl
 	}
 	h := &apiserverServiceHandler{hdlr}
 	opts = append(opts, api.WithEndpoint(&apipb.Endpoint{
-		Name:        "ApiserverService.Call",
-		Description: "ApiserverService.Call",
-		Path:        []string{"/apiserver/v1/apiserver/Call"},
-		Method:      []string{"POST"},
+		Name:        "ApiserverService.GetIP",
+		Description: "ApiserverService.GetIP",
+		Path:        []string{"/api/v1/getIP"},
+		Method:      []string{"GET"},
+		Body:        "*",
+		Handler:     "rpc",
+	}))
+	opts = append(opts, api.WithEndpoint(&apipb.Endpoint{
+		Name:        "ApiserverService.Healthz",
+		Description: "ApiserverService.Healthz",
+		Path:        []string{"/api/v1/healthz"},
+		Method:      []string{"GET"},
 		Body:        "*",
 		Handler:     "rpc",
 	}))
@@ -277,91 +207,10 @@ type apiserverServiceHandler struct {
 	ApiserverServiceHandler
 }
 
-func (h *apiserverServiceHandler) Call(ctx context.Context, in *Request, out *Response) error {
-	return h.ApiserverServiceHandler.Call(ctx, in, out)
+func (h *apiserverServiceHandler) GetIP(ctx context.Context, in *Empty, out *IPRsp) error {
+	return h.ApiserverServiceHandler.GetIP(ctx, in, out)
 }
 
-func (h *apiserverServiceHandler) Stream(ctx context.Context, stream server.Stream) error {
-	m := new(StreamingRequest)
-	if err := stream.Recv(m); err != nil {
-		return err
-	}
-	return h.ApiserverServiceHandler.Stream(ctx, m, &apiserverServiceStreamStream{stream})
-}
-
-type ApiserverService_StreamStream interface {
-	Context() context.Context
-	SendMsg(interface{}) error
-	RecvMsg(interface{}) error
-	Close() error
-	Send(*StreamingResponse) error
-}
-
-type apiserverServiceStreamStream struct {
-	stream server.Stream
-}
-
-func (x *apiserverServiceStreamStream) Close() error {
-	return x.stream.Close()
-}
-
-func (x *apiserverServiceStreamStream) Context() context.Context {
-	return x.stream.Context()
-}
-
-func (x *apiserverServiceStreamStream) SendMsg(m interface{}) error {
-	return x.stream.Send(m)
-}
-
-func (x *apiserverServiceStreamStream) RecvMsg(m interface{}) error {
-	return x.stream.Recv(m)
-}
-
-func (x *apiserverServiceStreamStream) Send(m *StreamingResponse) error {
-	return x.stream.Send(m)
-}
-
-func (h *apiserverServiceHandler) PingPong(ctx context.Context, stream server.Stream) error {
-	return h.ApiserverServiceHandler.PingPong(ctx, &apiserverServicePingPongStream{stream})
-}
-
-type ApiserverService_PingPongStream interface {
-	Context() context.Context
-	SendMsg(interface{}) error
-	RecvMsg(interface{}) error
-	Close() error
-	Send(*Pong) error
-	Recv() (*Ping, error)
-}
-
-type apiserverServicePingPongStream struct {
-	stream server.Stream
-}
-
-func (x *apiserverServicePingPongStream) Close() error {
-	return x.stream.Close()
-}
-
-func (x *apiserverServicePingPongStream) Context() context.Context {
-	return x.stream.Context()
-}
-
-func (x *apiserverServicePingPongStream) SendMsg(m interface{}) error {
-	return x.stream.Send(m)
-}
-
-func (x *apiserverServicePingPongStream) RecvMsg(m interface{}) error {
-	return x.stream.Recv(m)
-}
-
-func (x *apiserverServicePingPongStream) Send(m *Pong) error {
-	return x.stream.Send(m)
-}
-
-func (x *apiserverServicePingPongStream) Recv() (*Ping, error) {
-	m := new(Ping)
-	if err := x.stream.Recv(m); err != nil {
-		return nil, err
-	}
-	return m, nil
+func (h *apiserverServiceHandler) Healthz(ctx context.Context, in *Empty, out *Empty) error {
+	return h.ApiserverServiceHandler.Healthz(ctx, in, out)
 }

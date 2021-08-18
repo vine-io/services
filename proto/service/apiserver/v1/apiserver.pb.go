@@ -27,23 +27,21 @@ var _ = ebinary.BigEndian
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion4
 
-type Request struct {
-	// +gen:required
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+type Empty struct {
 }
 
-func (m *Request) Reset()         { *m = Request{} }
-func (m *Request) String() string { return proto.CompactTextString(m) }
-func (*Request) ProtoMessage()    {}
-func (*Request) Descriptor() ([]byte, []int) {
+func (m *Empty) Reset()         { *m = Empty{} }
+func (m *Empty) String() string { return proto.CompactTextString(m) }
+func (*Empty) ProtoMessage()    {}
+func (*Empty) Descriptor() ([]byte, []int) {
 	return fileDescriptor_c3bb445ac4faf80b, []int{0}
 }
-func (m *Request) XXX_Unmarshal(b []byte) error {
+func (m *Empty) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *Empty) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_Request.Marshal(b, m, deterministic)
+		return xxx_messageInfo_Empty.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -53,34 +51,34 @@ func (m *Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (m *Request) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Request.Merge(m, src)
+func (m *Empty) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Empty.Merge(m, src)
 }
-func (m *Request) XXX_Size() int {
+func (m *Empty) XXX_Size() int {
 	return m.XSize()
 }
-func (m *Request) XXX_DiscardUnknown() {
-	xxx_messageInfo_Request.DiscardUnknown(m)
+func (m *Empty) XXX_DiscardUnknown() {
+	xxx_messageInfo_Empty.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_Request proto.InternalMessageInfo
+var xxx_messageInfo_Empty proto.InternalMessageInfo
 
-type Response struct {
-	Msg string `protobuf:"bytes,1,opt,name=msg,proto3" json:"msg,omitempty"`
+type IPRsp struct {
+	Addr string `protobuf:"bytes,1,opt,name=addr,proto3" json:"addr,omitempty"`
 }
 
-func (m *Response) Reset()         { *m = Response{} }
-func (m *Response) String() string { return proto.CompactTextString(m) }
-func (*Response) ProtoMessage()    {}
-func (*Response) Descriptor() ([]byte, []int) {
+func (m *IPRsp) Reset()         { *m = IPRsp{} }
+func (m *IPRsp) String() string { return proto.CompactTextString(m) }
+func (*IPRsp) ProtoMessage()    {}
+func (*IPRsp) Descriptor() ([]byte, []int) {
 	return fileDescriptor_c3bb445ac4faf80b, []int{1}
 }
-func (m *Response) XXX_Unmarshal(b []byte) error {
+func (m *IPRsp) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *Response) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *IPRsp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_Response.Marshal(b, m, deterministic)
+		return xxx_messageInfo_IPRsp.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -90,173 +88,21 @@ func (m *Response) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 		return b[:n], nil
 	}
 }
-func (m *Response) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Response.Merge(m, src)
+func (m *IPRsp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_IPRsp.Merge(m, src)
 }
-func (m *Response) XXX_Size() int {
+func (m *IPRsp) XXX_Size() int {
 	return m.XSize()
 }
-func (m *Response) XXX_DiscardUnknown() {
-	xxx_messageInfo_Response.DiscardUnknown(m)
+func (m *IPRsp) XXX_DiscardUnknown() {
+	xxx_messageInfo_IPRsp.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_Response proto.InternalMessageInfo
-
-type StreamingRequest struct {
-	Count int64 `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`
-}
-
-func (m *StreamingRequest) Reset()         { *m = StreamingRequest{} }
-func (m *StreamingRequest) String() string { return proto.CompactTextString(m) }
-func (*StreamingRequest) ProtoMessage()    {}
-func (*StreamingRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_c3bb445ac4faf80b, []int{2}
-}
-func (m *StreamingRequest) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *StreamingRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_StreamingRequest.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *StreamingRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_StreamingRequest.Merge(m, src)
-}
-func (m *StreamingRequest) XXX_Size() int {
-	return m.XSize()
-}
-func (m *StreamingRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_StreamingRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_StreamingRequest proto.InternalMessageInfo
-
-type StreamingResponse struct {
-	Count int64 `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`
-}
-
-func (m *StreamingResponse) Reset()         { *m = StreamingResponse{} }
-func (m *StreamingResponse) String() string { return proto.CompactTextString(m) }
-func (*StreamingResponse) ProtoMessage()    {}
-func (*StreamingResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_c3bb445ac4faf80b, []int{3}
-}
-func (m *StreamingResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *StreamingResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_StreamingResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *StreamingResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_StreamingResponse.Merge(m, src)
-}
-func (m *StreamingResponse) XXX_Size() int {
-	return m.XSize()
-}
-func (m *StreamingResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_StreamingResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_StreamingResponse proto.InternalMessageInfo
-
-type Ping struct {
-	Stroke int64 `protobuf:"varint,1,opt,name=stroke,proto3" json:"stroke,omitempty"`
-}
-
-func (m *Ping) Reset()         { *m = Ping{} }
-func (m *Ping) String() string { return proto.CompactTextString(m) }
-func (*Ping) ProtoMessage()    {}
-func (*Ping) Descriptor() ([]byte, []int) {
-	return fileDescriptor_c3bb445ac4faf80b, []int{4}
-}
-func (m *Ping) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *Ping) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_Ping.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *Ping) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Ping.Merge(m, src)
-}
-func (m *Ping) XXX_Size() int {
-	return m.XSize()
-}
-func (m *Ping) XXX_DiscardUnknown() {
-	xxx_messageInfo_Ping.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_Ping proto.InternalMessageInfo
-
-type Pong struct {
-	Stroke int64 `protobuf:"varint,1,opt,name=stroke,proto3" json:"stroke,omitempty"`
-}
-
-func (m *Pong) Reset()         { *m = Pong{} }
-func (m *Pong) String() string { return proto.CompactTextString(m) }
-func (*Pong) ProtoMessage()    {}
-func (*Pong) Descriptor() ([]byte, []int) {
-	return fileDescriptor_c3bb445ac4faf80b, []int{5}
-}
-func (m *Pong) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *Pong) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_Pong.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *Pong) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Pong.Merge(m, src)
-}
-func (m *Pong) XXX_Size() int {
-	return m.XSize()
-}
-func (m *Pong) XXX_DiscardUnknown() {
-	xxx_messageInfo_Pong.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_Pong proto.InternalMessageInfo
+var xxx_messageInfo_IPRsp proto.InternalMessageInfo
 
 func init() {
-	proto.RegisterType((*Request)(nil), "apiserverv1.Request")
-	proto.RegisterType((*Response)(nil), "apiserverv1.Response")
-	proto.RegisterType((*StreamingRequest)(nil), "apiserverv1.StreamingRequest")
-	proto.RegisterType((*StreamingResponse)(nil), "apiserverv1.StreamingResponse")
-	proto.RegisterType((*Ping)(nil), "apiserverv1.Ping")
-	proto.RegisterType((*Pong)(nil), "apiserverv1.Pong")
+	proto.RegisterType((*Empty)(nil), "apiserverv1.Empty")
+	proto.RegisterType((*IPRsp)(nil), "apiserverv1.IPRsp")
 }
 
 func init() {
@@ -264,100 +110,41 @@ func init() {
 }
 
 var fileDescriptor_c3bb445ac4faf80b = []byte{
-	// 322 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x92, 0xb1, 0x4e, 0xf3, 0x30,
-	0x14, 0x85, 0x6d, 0xb5, 0x7f, 0xff, 0x72, 0x59, 0x5a, 0xab, 0x20, 0x54, 0x51, 0x0b, 0x79, 0x2a,
-	0x03, 0x49, 0x0b, 0x82, 0x85, 0x89, 0x22, 0xb1, 0xb0, 0xa0, 0x74, 0x63, 0x22, 0xad, 0xac, 0x60,
-	0xd1, 0xd8, 0x25, 0x76, 0xf3, 0x1c, 0x3c, 0x56, 0x27, 0xd4, 0x91, 0x11, 0x9a, 0x17, 0x41, 0x71,
-	0x92, 0x92, 0x46, 0x74, 0x61, 0xbb, 0xf7, 0x9c, 0x4f, 0x37, 0xe7, 0x44, 0x86, 0xbb, 0x40, 0x98,
-	0xe7, 0xc5, 0xc4, 0x99, 0xaa, 0xd0, 0x8d, 0x85, 0xe4, 0x67, 0x42, 0xb9, 0x9a, 0x47, 0xb1, 0x98,
-	0x72, 0xed, 0xce, 0x23, 0x65, 0x36, 0xab, 0xeb, 0xcf, 0x45, 0x3a, 0xf2, 0xc8, 0x8d, 0x87, 0x3f,
-	0x8b, 0x63, 0x21, 0xb2, 0xbf, 0x11, 0xe2, 0x21, 0xeb, 0xc1, 0x7f, 0x8f, 0xbf, 0x2e, 0xb8, 0x36,
-	0x84, 0x40, 0x5d, 0xfa, 0x21, 0x3f, 0xc2, 0x27, 0xb8, 0xbf, 0xe7, 0xd9, 0x99, 0x1d, 0x43, 0xd3,
-	0xe3, 0x7a, 0xae, 0xa4, 0xe6, 0xa4, 0x05, 0xb5, 0x50, 0x07, 0xb9, 0x9d, 0x8e, 0xac, 0x0f, 0xad,
-	0xb1, 0x89, 0xb8, 0x1f, 0x0a, 0x19, 0x14, 0x57, 0x3a, 0xf0, 0x6f, 0xaa, 0x16, 0xd2, 0x58, 0xae,
-	0xe6, 0x65, 0x0b, 0x3b, 0x85, 0x76, 0x89, 0xcc, 0x0f, 0xfe, 0x8e, 0x52, 0xa8, 0x3f, 0x08, 0x19,
-	0x90, 0x43, 0x68, 0x68, 0x13, 0xa9, 0x17, 0x9e, 0xdb, 0xf9, 0x66, 0x7d, 0xb5, 0xdb, 0x3f, 0x7f,
-	0xc7, 0xd0, 0xba, 0x29, 0x1a, 0x8e, 0xb3, 0x1f, 0x42, 0x2e, 0xa1, 0x7e, 0xeb, 0xcf, 0x66, 0xa4,
-	0xe3, 0x94, 0xca, 0x3b, 0x79, 0xe6, 0xee, 0x41, 0x45, 0xcd, 0xf2, 0x31, 0x44, 0xee, 0xa1, 0x91,
-	0xc5, 0x26, 0xbd, 0x2d, 0xa4, 0xda, 0xba, 0x4b, 0x77, 0xd9, 0xc5, 0xa9, 0x01, 0x26, 0x57, 0xd0,
-	0x4c, 0x8b, 0xd9, 0xf0, 0xed, 0x2d, 0x3e, 0x95, 0xbb, 0x15, 0x49, 0xc9, 0x80, 0xa1, 0x3e, 0x1e,
-	0xe0, 0xd1, 0xd3, 0xf2, 0x8b, 0xa2, 0xe5, 0x9a, 0xe2, 0xd5, 0x9a, 0xe2, 0xcf, 0x35, 0xc5, 0x6f,
-	0x09, 0x45, 0xab, 0x84, 0xa2, 0x8f, 0x84, 0xa2, 0xc7, 0xd1, 0xdf, 0x5e, 0xc5, 0x75, 0xe9, 0x63,
-	0x93, 0x86, 0xe5, 0x2e, 0xbe, 0x03, 0x00, 0x00, 0xff, 0xff, 0x1c, 0x9c, 0xe2, 0xf4, 0x62, 0x02,
-	0x00, 0x00,
+	// 212 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x72, 0x4b, 0xcf, 0x2c, 0xc9,
+	0x28, 0x4d, 0xd2, 0x4b, 0xce, 0xcf, 0xd5, 0x2f, 0xcb, 0xcc, 0x4b, 0xd5, 0xcd, 0xcc, 0xd7, 0x2f,
+	0x4e, 0x2d, 0x2a, 0xcb, 0x4c, 0x4e, 0x2d, 0xd6, 0x2f, 0x28, 0xca, 0x2f, 0x81, 0x73, 0xf5, 0x13,
+	0x0b, 0x32, 0x41, 0xcc, 0xd4, 0x22, 0xfd, 0x32, 0x43, 0x04, 0x47, 0x0f, 0xac, 0x48, 0x88, 0x1b,
+	0x2e, 0x50, 0x66, 0xa8, 0xc4, 0xce, 0xc5, 0xea, 0x9a, 0x5b, 0x50, 0x52, 0xa9, 0x24, 0xcd, 0xc5,
+	0xea, 0x19, 0x10, 0x54, 0x5c, 0x20, 0x24, 0xc4, 0xc5, 0x92, 0x98, 0x92, 0x52, 0x24, 0xc1, 0xa8,
+	0xc0, 0xa8, 0xc1, 0x19, 0x04, 0x66, 0x1b, 0x55, 0x71, 0x09, 0x38, 0xc2, 0x34, 0x05, 0x43, 0xec,
+	0x10, 0x32, 0xe4, 0x62, 0x75, 0x4f, 0x2d, 0xf1, 0x0c, 0x10, 0x12, 0xd2, 0x43, 0x32, 0x50, 0x0f,
+	0x6c, 0x9a, 0x14, 0xaa, 0x18, 0xd8, 0x60, 0x25, 0x06, 0x21, 0x63, 0x2e, 0x76, 0x8f, 0xd4, 0xc4,
+	0x9c, 0x92, 0x8c, 0x2a, 0x22, 0x34, 0x41, 0x9c, 0xc5, 0xe0, 0x94, 0x70, 0xe2, 0xa1, 0x1c, 0xc3,
+	0x89, 0x47, 0x72, 0x8c, 0x17, 0x1e, 0xc9, 0x31, 0x3e, 0x78, 0x24, 0xc7, 0x38, 0xe1, 0xb1, 0x1c,
+	0xc3, 0x85, 0xc7, 0x72, 0x0c, 0x37, 0x1e, 0xcb, 0x31, 0x44, 0x39, 0x91, 0x17, 0x28, 0xd6, 0x48,
+	0x36, 0x25, 0xb1, 0x81, 0xd5, 0x19, 0x03, 0x02, 0x00, 0x00, 0xff, 0xff, 0x4f, 0x76, 0x7a, 0x15,
+	0x61, 0x01, 0x00, 0x00,
 }
 
-func (m *Request) XSize() (n int) {
+func (m *Empty) XSize() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	l = len(m.Name)
+	return n
+}
+
+func (m *IPRsp) XSize() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Addr)
 	if l > 0 {
 		n += 1 + l + sovApiserver(uint64(l))
-	}
-	return n
-}
-
-func (m *Response) XSize() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Msg)
-	if l > 0 {
-		n += 1 + l + sovApiserver(uint64(l))
-	}
-	return n
-}
-
-func (m *StreamingRequest) XSize() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Count != 0 {
-		n += 1 + sovApiserver(uint64(m.Count))
-	}
-	return n
-}
-
-func (m *StreamingResponse) XSize() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Count != 0 {
-		n += 1 + sovApiserver(uint64(m.Count))
-	}
-	return n
-}
-
-func (m *Ping) XSize() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Stroke != 0 {
-		n += 1 + sovApiserver(uint64(m.Stroke))
-	}
-	return n
-}
-
-func (m *Pong) XSize() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Stroke != 0 {
-		n += 1 + sovApiserver(uint64(m.Stroke))
 	}
 	return n
 }
@@ -368,7 +155,7 @@ func sovApiserver(x uint64) (n int) {
 func sozApiserver(x uint64) (n int) {
 	return sovApiserver(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func (m *Request) Marshal() (dAtA []byte, err error) {
+func (m *Empty) Marshal() (dAtA []byte, err error) {
 	size := m.XSize()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -378,164 +165,45 @@ func (m *Request) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *Request) MarshalTo(dAtA []byte) (int, error) {
+func (m *Empty) MarshalTo(dAtA []byte) (int, error) {
 	size := m.XSize()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *Request) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *Empty) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.Name) > 0 {
-		i -= len(m.Name)
-		copy(dAtA[i:], m.Name)
-		i = encodeVarintApiserver(dAtA, i, uint64(len(m.Name)))
+	return len(dAtA) - i, nil
+}
+
+func (m *IPRsp) Marshal() (dAtA []byte, err error) {
+	size := m.XSize()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *IPRsp) MarshalTo(dAtA []byte) (int, error) {
+	size := m.XSize()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *IPRsp) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Addr) > 0 {
+		i -= len(m.Addr)
+		copy(dAtA[i:], m.Addr)
+		i = encodeVarintApiserver(dAtA, i, uint64(len(m.Addr)))
 		i--
 		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *Response) Marshal() (dAtA []byte, err error) {
-	size := m.XSize()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *Response) MarshalTo(dAtA []byte) (int, error) {
-	size := m.XSize()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *Response) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if len(m.Msg) > 0 {
-		i -= len(m.Msg)
-		copy(dAtA[i:], m.Msg)
-		i = encodeVarintApiserver(dAtA, i, uint64(len(m.Msg)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *StreamingRequest) Marshal() (dAtA []byte, err error) {
-	size := m.XSize()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *StreamingRequest) MarshalTo(dAtA []byte) (int, error) {
-	size := m.XSize()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *StreamingRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Count != 0 {
-		i = encodeVarintApiserver(dAtA, i, uint64(m.Count))
-		i--
-		dAtA[i] = 0x8
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *StreamingResponse) Marshal() (dAtA []byte, err error) {
-	size := m.XSize()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *StreamingResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.XSize()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *StreamingResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Count != 0 {
-		i = encodeVarintApiserver(dAtA, i, uint64(m.Count))
-		i--
-		dAtA[i] = 0x8
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *Ping) Marshal() (dAtA []byte, err error) {
-	size := m.XSize()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *Ping) MarshalTo(dAtA []byte) (int, error) {
-	size := m.XSize()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *Ping) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Stroke != 0 {
-		i = encodeVarintApiserver(dAtA, i, uint64(m.Stroke))
-		i--
-		dAtA[i] = 0x8
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *Pong) Marshal() (dAtA []byte, err error) {
-	size := m.XSize()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *Pong) MarshalTo(dAtA []byte) (int, error) {
-	size := m.XSize()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *Pong) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Stroke != 0 {
-		i = encodeVarintApiserver(dAtA, i, uint64(m.Stroke))
-		i--
-		dAtA[i] = 0x8
 	}
 	return len(dAtA) - i, nil
 }
@@ -551,7 +219,7 @@ func encodeVarintApiserver(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func (m *Request) Unmarshal(dAtA []byte) error {
+func (m *Empty) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -574,15 +242,65 @@ func (m *Request) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: Request: wiretype end group for non-group")
+			return fmt.Errorf("proto: Empty: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Request: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: Empty: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipApiserver(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthApiserver
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *IPRsp) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowApiserver
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: IPRsp: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: IPRsp: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Addr", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -610,366 +328,8 @@ func (m *Request) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Name = string(dAtA[iNdEx:postIndex])
+			m.Addr = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipApiserver(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthApiserver
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *Response) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowApiserver
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: Response: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Response: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Msg", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowApiserver
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthApiserver
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthApiserver
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Msg = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipApiserver(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthApiserver
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *StreamingRequest) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowApiserver
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: StreamingRequest: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: StreamingRequest: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Count", wireType)
-			}
-			m.Count = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowApiserver
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Count |= int64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipApiserver(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthApiserver
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *StreamingResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowApiserver
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: StreamingResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: StreamingResponse: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Count", wireType)
-			}
-			m.Count = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowApiserver
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Count |= int64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipApiserver(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthApiserver
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *Ping) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowApiserver
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: Ping: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Ping: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Stroke", wireType)
-			}
-			m.Stroke = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowApiserver
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Stroke |= int64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipApiserver(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthApiserver
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *Pong) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowApiserver
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: Pong: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: Pong: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Stroke", wireType)
-			}
-			m.Stroke = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowApiserver
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Stroke |= int64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
 		default:
 			iNdEx = preIndex
 			skippy, err := skipApiserver(dAtA[iNdEx:])
@@ -1080,10 +440,10 @@ var (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type ApiserverServiceClient interface {
-	// +gen:post=/apiserver/v1/apiserver/Call
-	Call(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
-	Stream(ctx context.Context, in *StreamingRequest, opts ...grpc.CallOption) (ApiserverService_StreamClient, error)
-	PingPong(ctx context.Context, opts ...grpc.CallOption) (ApiserverService_PingPongClient, error)
+	// +gen:get=/api/v1/getIP
+	GetIP(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*IPRsp, error)
+	// +gen:get=/api/v1/healthz
+	Healthz(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
 }
 
 type apiserverServiceClient struct {
@@ -1094,167 +454,81 @@ func NewApiserverServiceClient(cc *grpc.ClientConn) ApiserverServiceClient {
 	return &apiserverServiceClient{cc}
 }
 
-func (c *apiserverServiceClient) Call(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
-	out := new(Response)
-	err := c.cc.Invoke(ctx, "/apiserverv1.ApiserverService/Call", in, out, opts...)
+func (c *apiserverServiceClient) GetIP(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*IPRsp, error) {
+	out := new(IPRsp)
+	err := c.cc.Invoke(ctx, "/apiserverv1.ApiserverService/GetIP", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *apiserverServiceClient) Stream(ctx context.Context, in *StreamingRequest, opts ...grpc.CallOption) (ApiserverService_StreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_ApiserverService_serviceDesc.Streams[0], "/apiserverv1.ApiserverService/Stream", opts...)
+func (c *apiserverServiceClient) Healthz(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, "/apiserverv1.ApiserverService/Healthz", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &apiserverServiceStreamClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type ApiserverService_StreamClient interface {
-	Recv() (*StreamingResponse, error)
-	grpc.ClientStream
-}
-
-type apiserverServiceStreamClient struct {
-	grpc.ClientStream
-}
-
-func (x *apiserverServiceStreamClient) Recv() (*StreamingResponse, error) {
-	m := new(StreamingResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *apiserverServiceClient) PingPong(ctx context.Context, opts ...grpc.CallOption) (ApiserverService_PingPongClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_ApiserverService_serviceDesc.Streams[1], "/apiserverv1.ApiserverService/PingPong", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &apiserverServicePingPongClient{stream}
-	return x, nil
-}
-
-type ApiserverService_PingPongClient interface {
-	Send(*Ping) error
-	Recv() (*Pong, error)
-	grpc.ClientStream
-}
-
-type apiserverServicePingPongClient struct {
-	grpc.ClientStream
-}
-
-func (x *apiserverServicePingPongClient) Send(m *Ping) error {
-	return x.ClientStream.SendMsg(m)
-}
-
-func (x *apiserverServicePingPongClient) Recv() (*Pong, error) {
-	m := new(Pong)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
+	return out, nil
 }
 
 // ApiserverServiceServer is the server API for ApiserverService service.
 type ApiserverServiceServer interface {
-	// +gen:post=/apiserver/v1/apiserver/Call
-	Call(context.Context, *Request) (*Response, error)
-	Stream(*StreamingRequest, ApiserverService_StreamServer) error
-	PingPong(ApiserverService_PingPongServer) error
+	// +gen:get=/api/v1/getIP
+	GetIP(context.Context, *Empty) (*IPRsp, error)
+	// +gen:get=/api/v1/healthz
+	Healthz(context.Context, *Empty) (*Empty, error)
 }
 
 // UnimplementedApiserverServiceServer can be embedded to have forward compatible implementations.
 type UnimplementedApiserverServiceServer struct {
 }
 
-func (*UnimplementedApiserverServiceServer) Call(ctx context.Context, req *Request) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Call not implemented")
+func (*UnimplementedApiserverServiceServer) GetIP(ctx context.Context, req *Empty) (*IPRsp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetIP not implemented")
 }
-func (*UnimplementedApiserverServiceServer) Stream(req *StreamingRequest, srv ApiserverService_StreamServer) error {
-	return status.Errorf(codes.Unimplemented, "method Stream not implemented")
-}
-func (*UnimplementedApiserverServiceServer) PingPong(srv ApiserverService_PingPongServer) error {
-	return status.Errorf(codes.Unimplemented, "method PingPong not implemented")
+func (*UnimplementedApiserverServiceServer) Healthz(ctx context.Context, req *Empty) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Healthz not implemented")
 }
 
 func RegisterApiserverServiceServer(s *grpc.Server, srv ApiserverServiceServer) {
 	s.RegisterService(&_ApiserverService_serviceDesc, srv)
 }
 
-func _ApiserverService_Call_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Request)
+func _ApiserverService_GetIP_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ApiserverServiceServer).Call(ctx, in)
+		return srv.(ApiserverServiceServer).GetIP(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/apiserverv1.ApiserverService/Call",
+		FullMethod: "/apiserverv1.ApiserverService/GetIP",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiserverServiceServer).Call(ctx, req.(*Request))
+		return srv.(ApiserverServiceServer).GetIP(ctx, req.(*Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ApiserverService_Stream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(StreamingRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(ApiserverServiceServer).Stream(m, &apiserverServiceStreamServer{stream})
-}
-
-type ApiserverService_StreamServer interface {
-	Send(*StreamingResponse) error
-	grpc.ServerStream
-}
-
-type apiserverServiceStreamServer struct {
-	grpc.ServerStream
-}
-
-func (x *apiserverServiceStreamServer) Send(m *StreamingResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _ApiserverService_PingPong_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(ApiserverServiceServer).PingPong(&apiserverServicePingPongServer{stream})
-}
-
-type ApiserverService_PingPongServer interface {
-	Send(*Pong) error
-	Recv() (*Ping, error)
-	grpc.ServerStream
-}
-
-type apiserverServicePingPongServer struct {
-	grpc.ServerStream
-}
-
-func (x *apiserverServicePingPongServer) Send(m *Pong) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func (x *apiserverServicePingPongServer) Recv() (*Ping, error) {
-	m := new(Ping)
-	if err := x.ServerStream.RecvMsg(m); err != nil {
+func _ApiserverService_Healthz_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
 		return nil, err
 	}
-	return m, nil
+	if interceptor == nil {
+		return srv.(ApiserverServiceServer).Healthz(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/apiserverv1.ApiserverService/Healthz",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiserverServiceServer).Healthz(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 var _ApiserverService_serviceDesc = grpc.ServiceDesc{
@@ -1262,22 +536,14 @@ var _ApiserverService_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*ApiserverServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Call",
-			Handler:    _ApiserverService_Call_Handler,
-		},
-	},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "Stream",
-			Handler:       _ApiserverService_Stream_Handler,
-			ServerStreams: true,
+			MethodName: "GetIP",
+			Handler:    _ApiserverService_GetIP_Handler,
 		},
 		{
-			StreamName:    "PingPong",
-			Handler:       _ApiserverService_PingPong_Handler,
-			ServerStreams: true,
-			ClientStreams: true,
+			MethodName: "Healthz",
+			Handler:    _ApiserverService_Healthz_Handler,
 		},
 	},
+	Streams:  []grpc.StreamDesc{},
 	Metadata: "github.com/vine-io/services/proto/service/apiserver/v1/apiserver.proto",
 }

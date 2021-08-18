@@ -23,19 +23,32 @@
 package apiserver
 
 import (
-	log "github.com/vine-io/vine/lib/logger"
+	"context"
 
-	"github.com/vine-io/services/pkg/apiserver/server"
+	"github.com/vine-io/services/pkg/runtime"
+	pb "github.com/vine-io/services/proto/service/apiserver/v1"
+	"github.com/vine-io/vine/core/client"
 )
 
-func Run() {
-	s := server.New()
+type Client struct {
+	cc pb.ApiserverService
+}
 
-	if err := s.Init(); err != nil {
-		log.Fatal(err)
+func NewClient(conn client.Client) *Client {
+	return &Client{
+		cc: pb.NewApiserverService(runtime.ApiserverName, conn),
 	}
+}
 
-	if err := s.Run(); err != nil {
-		log.Fatal(err)
+func (c *Client) Healthz(ctx context.Context, opts ...client.CallOption) error {
+	_, err := c.cc.Healthz(ctx, &pb.Empty{}, opts...)
+	return err
+}
+
+func (c *Client) GetIP(ctx context.Context, opts ...client.CallOption) (string, error) {
+	rsp, err := c.cc.GetIP(ctx, &pb.Empty{}, opts...)
+	if err != nil {
+		return "", err
 	}
+	return rsp.Addr, nil
 }

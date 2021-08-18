@@ -4,76 +4,23 @@
 package apiserverv1
 
 import (
-	fmt "fmt"
-	proto "github.com/gogo/protobuf/proto"
 	is "github.com/vine-io/vine/util/is"
-	math "math"
 )
 
-// Reference imports to suppress errors if they are not otherwise used.
-var _ = proto.Marshal
-var _ = fmt.Errorf
-var _ = math.Inf
-
-// This is a compile-time assertion to ensure that this generated file
-// is compatible with the proto package it is being compiled against.
-// A compilation error at this line likely means your copy of the
-// proto package needs to be updated.
-const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
-
-func (m *Request) Validate() error {
+func (m *Empty) Validate() error {
 	return m.ValidateE("")
 }
 
-func (m *Request) ValidateE(prefix string) error {
-	errs := make([]error, 0)
-	if len(m.Name) == 0 {
-		errs = append(errs, fmt.Errorf("field '%sname' is required", prefix))
-	}
-	return is.MargeErr(errs...)
-}
-
-func (m *Response) Validate() error {
-	return m.ValidateE("")
-}
-
-func (m *Response) ValidateE(prefix string) error {
+func (m *Empty) ValidateE(prefix string) error {
 	errs := make([]error, 0)
 	return is.MargeErr(errs...)
 }
 
-func (m *StreamingRequest) Validate() error {
+func (m *IPRsp) Validate() error {
 	return m.ValidateE("")
 }
 
-func (m *StreamingRequest) ValidateE(prefix string) error {
-	errs := make([]error, 0)
-	return is.MargeErr(errs...)
-}
-
-func (m *StreamingResponse) Validate() error {
-	return m.ValidateE("")
-}
-
-func (m *StreamingResponse) ValidateE(prefix string) error {
-	errs := make([]error, 0)
-	return is.MargeErr(errs...)
-}
-
-func (m *Ping) Validate() error {
-	return m.ValidateE("")
-}
-
-func (m *Ping) ValidateE(prefix string) error {
-	errs := make([]error, 0)
-	return is.MargeErr(errs...)
-}
-
-func (m *Pong) Validate() error {
-	return m.ValidateE("")
-}
-
-func (m *Pong) ValidateE(prefix string) error {
+func (m *IPRsp) ValidateE(prefix string) error {
 	errs := make([]error, 0)
 	return is.MargeErr(errs...)
 }

@@ -47,9 +47,6 @@ github.com/jinzhu/inflection
 github.com/jinzhu/now
 # github.com/json-iterator/go v1.1.11
 github.com/json-iterator/go
-# github.com/lack-io/pkg/inject v0.2.0
-## explicit
-github.com/lack-io/pkg/inject
 # github.com/matttproud/golang_protobuf_extensions v1.0.1
 github.com/matttproud/golang_protobuf_extensions/pbutil
 # github.com/miekg/dns v1.1.35
@@ -88,7 +85,10 @@ github.com/vine-io/cli
 github.com/vine-io/gscheduler
 github.com/vine-io/gscheduler/cron
 github.com/vine-io/gscheduler/rbtree
-# github.com/vine-io/vine v0.21.0
+# github.com/vine-io/pkg/inject v0.1.0
+## explicit
+github.com/vine-io/pkg/inject
+# github.com/vine-io/vine v0.22.0
 ## explicit
 github.com/vine-io/vine
 github.com/vine-io/vine/core/broker
@@ -217,7 +217,7 @@ golang.org/x/text/unicode/norm
 # google.golang.org/genproto v0.0.0-20210602131652-f16073e35f0c
 google.golang.org/genproto/googleapis/api/annotations
 google.golang.org/genproto/googleapis/rpc/status
-# google.golang.org/grpc v1.38.0 => google.golang.org/grpc v1.38.0
+# google.golang.org/grpc v1.39.0 => google.golang.org/grpc v1.39.0
 ## explicit
 google.golang.org/grpc
 google.golang.org/grpc/attributes
@@ -297,4 +297,4 @@ google.golang.org/protobuf/types/known/durationpb
 google.golang.org/protobuf/types/known/timestamppb
 # gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b
 gopkg.in/yaml.v3
-# google.golang.org/grpc => google.golang.org/grpc v1.38.0
+# google.golang.org/grpc => google.golang.org/grpc v1.39.0

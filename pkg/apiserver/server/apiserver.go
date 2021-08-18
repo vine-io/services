@@ -1,69 +1,39 @@
+// MIT License
+//
+// Copyright (c) 2021 Lack
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
 package server
 
 import (
-	"context"
-
-	"github.com/vine-io/vine"
-	log "github.com/vine-io/vine/lib/logger"
-
-	"github.com/vine-io/services/pkg/runtime"
 	"github.com/vine-io/services/pkg/apiserver/service"
+	"github.com/vine-io/services/pkg/runtime"
 	"github.com/vine-io/services/pkg/runtime/inject"
 	pb "github.com/vine-io/services/proto/service/apiserver/v1"
+	"github.com/vine-io/vine"
 )
 
-type server struct{
+type server struct {
 	vine.Service
 
 	H service.Apiserver `inject:""`
-}
-
-// Call is a single request handler called via client.Call or the generated client code
-func (s *server) Call(ctx context.Context, req *pb.Request, rsp *pb.Response) error {
-	// TODO: Validate
-	s.H.Call()
-	// FIXME: fix call method
-	log.Info("Received Apiserver.Call request")
-	rsp.Msg = "Hello " + req.Name
-	return nil
-}
-
-// Stream is a server side stream handler called via client.Stream or the generated client code
-func (s *server) Stream(ctx context.Context, req *pb.StreamingRequest, stream pb.ApiserverService_StreamStream) error {
-	log.Infof("Received Apiserver.Stream request with count: %d", req.Count)
-
-	// TODO: Validate
-	s.H.Stream()
-	// FIXME: fix stream method
-
-	for i := 0; i < int(req.Count); i++ {
-		log.Infof("Responding: %d", i)
-		if err := stream.Send(&pb.StreamingResponse{
-			Count: int64(i),
-		}); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-// PingPong is a bidirectional stream handler called via client.Stream or the generated client code
-func (s *server) PingPong(ctx context.Context, stream pb.ApiserverService_PingPongStream) error {
-	// TODO: Validate
-	s.H.PingPong()
-	// FIXME: fix stream pingpong
-
-	for {
-		req, err := stream.Recv()
-		if err != nil {
-			return err
-		}
-		log.Infof("Got ping %v", req.Stroke)
-		if err := stream.Send(&pb.Pong{Stroke: req.Stroke}); err != nil {
-			return err
-		}
-	}
 }
 
 func (s *server) Init() error {
