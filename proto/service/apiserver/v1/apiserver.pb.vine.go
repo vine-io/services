@@ -26,21 +26,21 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
-// API Endpoints for ApiserverService service
-func NewApiserverServiceEndpoints() []*apipb.Endpoint {
+// API Endpoints for APIServerService service
+func NewAPIServerServiceEndpoints() []*apipb.Endpoint {
 	return []*apipb.Endpoint{
 		&apipb.Endpoint{
-			Name:        "ApiserverService.GetIP",
-			Description: "ApiserverService.GetIP",
-			Path:        []string{"/api/v1/getIP"},
+			Name:        "APIServerService.Healthz",
+			Description: "APIServerService.Healthz",
+			Path:        []string{"/api/v1/healthz"},
 			Method:      []string{"GET"},
 			Body:        "*",
 			Handler:     "rpc",
 		},
 		&apipb.Endpoint{
-			Name:        "ApiserverService.Healthz",
-			Description: "ApiserverService.Healthz",
-			Path:        []string{"/api/v1/healthz"},
+			Name:        "APIServerService.GetIP",
+			Description: "APIServerService.GetIP",
+			Path:        []string{"/api/v1/getIP"},
 			Method:      []string{"GET"},
 			Body:        "*",
 			Handler:     "rpc",
@@ -48,28 +48,28 @@ func NewApiserverServiceEndpoints() []*apipb.Endpoint {
 	}
 }
 
-// Swagger OpenAPI 3.0 for ApiserverService service
-func NewApiserverServiceOpenAPI() *openapi.OpenAPI {
+// Swagger OpenAPI 3.0 for APIServerService service
+func NewAPIServerServiceOpenAPI() *openapi.OpenAPI {
 	return &openapi.OpenAPI{
 		Openapi: "3.0.1",
 		Info: &openapi.OpenAPIInfo{
-			Title:       "ApiserverServiceService",
-			Description: "OpenAPI3.0 for ApiserverService",
+			Title:       "APIServerServiceService",
+			Description: "OpenAPI3.0 for APIServerService",
 			Version:     "v1.0.0",
 		},
 		Servers: []*openapi.OpenAPIServer{},
 		Tags: []*openapi.OpenAPITag{
 			&openapi.OpenAPITag{
-				Name:        "ApiserverService",
-				Description: "OpenAPI3.0 for ApiserverService",
+				Name:        "APIServerService",
+				Description: "OpenAPI3.0 for APIServerService",
 			},
 		},
 		Paths: map[string]*openapi.OpenAPIPath{
 			"/api/v1/getIP": &openapi.OpenAPIPath{
 				Get: &openapi.OpenAPIPathDocs{
-					Tags:        []string{"ApiserverService"},
-					Description: "ApiserverService GetIP",
-					OperationId: "ApiserverServiceGetIP",
+					Tags:        []string{"APIServerService"},
+					Description: "APIServerService GetIP",
+					OperationId: "APIServerServiceGetIP",
 					Parameters:  []*openapi.PathParameters{},
 					Responses: map[string]*openapi.PathResponse{
 						"200": &openapi.PathResponse{
@@ -86,9 +86,9 @@ func NewApiserverServiceOpenAPI() *openapi.OpenAPI {
 			},
 			"/api/v1/healthz": &openapi.OpenAPIPath{
 				Get: &openapi.OpenAPIPathDocs{
-					Tags:        []string{"ApiserverService"},
-					Description: "ApiserverService Healthz",
-					OperationId: "ApiserverServiceHealthz",
+					Tags:        []string{"APIServerService"},
+					Description: "APIServerService Healthz",
+					OperationId: "APIServerServiceHealthz",
 					Parameters:  []*openapi.PathParameters{},
 					Responses: map[string]*openapi.PathResponse{
 						"200": &openapi.PathResponse{
@@ -124,39 +124,29 @@ func NewApiserverServiceOpenAPI() *openapi.OpenAPI {
 	}
 }
 
-// Client API for ApiserverService service
+// Client API for APIServerService service
 // +gen:openapi
-type ApiserverService interface {
-	// +gen:get=/api/v1/getIP
-	GetIP(ctx context.Context, in *Empty, opts ...client.CallOption) (*IPRsp, error)
+type APIServerService interface {
 	// +gen:get=/api/v1/healthz
 	Healthz(ctx context.Context, in *Empty, opts ...client.CallOption) (*Empty, error)
+	// +gen:get=/api/v1/getIP
+	GetIP(ctx context.Context, in *Empty, opts ...client.CallOption) (*IPRsp, error)
 }
 
-type apiserverService struct {
+type aPIServerService struct {
 	c    client.Client
 	name string
 }
 
-func NewApiserverService(name string, c client.Client) ApiserverService {
-	return &apiserverService{
+func NewAPIServerService(name string, c client.Client) APIServerService {
+	return &aPIServerService{
 		c:    c,
 		name: name,
 	}
 }
 
-func (c *apiserverService) GetIP(ctx context.Context, in *Empty, opts ...client.CallOption) (*IPRsp, error) {
-	req := c.c.NewRequest(c.name, "ApiserverService.GetIP", in)
-	out := new(IPRsp)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiserverService) Healthz(ctx context.Context, in *Empty, opts ...client.CallOption) (*Empty, error) {
-	req := c.c.NewRequest(c.name, "ApiserverService.Healthz", in)
+func (c *aPIServerService) Healthz(ctx context.Context, in *Empty, opts ...client.CallOption) (*Empty, error) {
+	req := c.c.NewRequest(c.name, "APIServerService.Healthz", in)
 	out := new(Empty)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -165,52 +155,62 @@ func (c *apiserverService) Healthz(ctx context.Context, in *Empty, opts ...clien
 	return out, nil
 }
 
-// Server API for ApiserverService service
-// +gen:openapi
-type ApiserverServiceHandler interface {
-	// +gen:get=/api/v1/getIP
-	GetIP(context.Context, *Empty, *IPRsp) error
-	// +gen:get=/api/v1/healthz
-	Healthz(context.Context, *Empty, *Empty) error
+func (c *aPIServerService) GetIP(ctx context.Context, in *Empty, opts ...client.CallOption) (*IPRsp, error) {
+	req := c.c.NewRequest(c.name, "APIServerService.GetIP", in)
+	out := new(IPRsp)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
-func RegisterApiserverServiceHandler(s server.Server, hdlr ApiserverServiceHandler, opts ...server.HandlerOption) error {
-	type apiserverServiceImpl interface {
-		GetIP(ctx context.Context, in *Empty, out *IPRsp) error
+// Server API for APIServerService service
+// +gen:openapi
+type APIServerServiceHandler interface {
+	// +gen:get=/api/v1/healthz
+	Healthz(context.Context, *Empty, *Empty) error
+	// +gen:get=/api/v1/getIP
+	GetIP(context.Context, *Empty, *IPRsp) error
+}
+
+func RegisterAPIServerServiceHandler(s server.Server, hdlr APIServerServiceHandler, opts ...server.HandlerOption) error {
+	type aPIServerServiceImpl interface {
 		Healthz(ctx context.Context, in *Empty, out *Empty) error
+		GetIP(ctx context.Context, in *Empty, out *IPRsp) error
 	}
-	type ApiserverService struct {
-		apiserverServiceImpl
+	type APIServerService struct {
+		aPIServerServiceImpl
 	}
-	h := &apiserverServiceHandler{hdlr}
+	h := &aPIServerServiceHandler{hdlr}
 	opts = append(opts, api.WithEndpoint(&apipb.Endpoint{
-		Name:        "ApiserverService.GetIP",
-		Description: "ApiserverService.GetIP",
-		Path:        []string{"/api/v1/getIP"},
-		Method:      []string{"GET"},
-		Body:        "*",
-		Handler:     "rpc",
-	}))
-	opts = append(opts, api.WithEndpoint(&apipb.Endpoint{
-		Name:        "ApiserverService.Healthz",
-		Description: "ApiserverService.Healthz",
+		Name:        "APIServerService.Healthz",
+		Description: "APIServerService.Healthz",
 		Path:        []string{"/api/v1/healthz"},
 		Method:      []string{"GET"},
 		Body:        "*",
 		Handler:     "rpc",
 	}))
-	opts = append(opts, server.OpenAPIHandler(NewApiserverServiceOpenAPI()))
-	return s.Handle(s.NewHandler(&ApiserverService{h}, opts...))
+	opts = append(opts, api.WithEndpoint(&apipb.Endpoint{
+		Name:        "APIServerService.GetIP",
+		Description: "APIServerService.GetIP",
+		Path:        []string{"/api/v1/getIP"},
+		Method:      []string{"GET"},
+		Body:        "*",
+		Handler:     "rpc",
+	}))
+	opts = append(opts, server.OpenAPIHandler(NewAPIServerServiceOpenAPI()))
+	return s.Handle(s.NewHandler(&APIServerService{h}, opts...))
 }
 
-type apiserverServiceHandler struct {
-	ApiserverServiceHandler
+type aPIServerServiceHandler struct {
+	APIServerServiceHandler
 }
 
-func (h *apiserverServiceHandler) GetIP(ctx context.Context, in *Empty, out *IPRsp) error {
-	return h.ApiserverServiceHandler.GetIP(ctx, in, out)
+func (h *aPIServerServiceHandler) Healthz(ctx context.Context, in *Empty, out *Empty) error {
+	return h.APIServerServiceHandler.Healthz(ctx, in, out)
 }
 
-func (h *apiserverServiceHandler) Healthz(ctx context.Context, in *Empty, out *Empty) error {
-	return h.ApiserverServiceHandler.Healthz(ctx, in, out)
+func (h *aPIServerServiceHandler) GetIP(ctx context.Context, in *Empty, out *IPRsp) error {
+	return h.APIServerServiceHandler.GetIP(ctx, in, out)
 }

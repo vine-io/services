@@ -31,12 +31,12 @@ import (
 )
 
 type Client struct {
-	cc pb.ApiserverService
+	cc pb.APIServerService
 }
 
 func NewClient(conn client.Client) *Client {
 	return &Client{
-		cc: pb.NewApiserverService(runtime.ApiserverName, conn),
+		cc: pb.NewAPIServerService(runtime.ApiserverName, conn),
 	}
 }
 

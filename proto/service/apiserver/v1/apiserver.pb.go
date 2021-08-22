@@ -110,21 +110,21 @@ func init() {
 }
 
 var fileDescriptor_c3bb445ac4faf80b = []byte{
-	// 212 bytes of a gzipped FileDescriptorProto
+	// 214 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x72, 0x4b, 0xcf, 0x2c, 0xc9,
 	0x28, 0x4d, 0xd2, 0x4b, 0xce, 0xcf, 0xd5, 0x2f, 0xcb, 0xcc, 0x4b, 0xd5, 0xcd, 0xcc, 0xd7, 0x2f,
 	0x4e, 0x2d, 0x2a, 0xcb, 0x4c, 0x4e, 0x2d, 0xd6, 0x2f, 0x28, 0xca, 0x2f, 0x81, 0x73, 0xf5, 0x13,
 	0x0b, 0x32, 0x41, 0xcc, 0xd4, 0x22, 0xfd, 0x32, 0x43, 0x04, 0x47, 0x0f, 0xac, 0x48, 0x88, 0x1b,
 	0x2e, 0x50, 0x66, 0xa8, 0xc4, 0xce, 0xc5, 0xea, 0x9a, 0x5b, 0x50, 0x52, 0xa9, 0x24, 0xcd, 0xc5,
 	0xea, 0x19, 0x10, 0x54, 0x5c, 0x20, 0x24, 0xc4, 0xc5, 0x92, 0x98, 0x92, 0x52, 0x24, 0xc1, 0xa8,
-	0xc0, 0xa8, 0xc1, 0x19, 0x04, 0x66, 0x1b, 0x55, 0x71, 0x09, 0x38, 0xc2, 0x34, 0x05, 0x43, 0xec,
-	0x10, 0x32, 0xe4, 0x62, 0x75, 0x4f, 0x2d, 0xf1, 0x0c, 0x10, 0x12, 0xd2, 0x43, 0x32, 0x50, 0x0f,
-	0x6c, 0x9a, 0x14, 0xaa, 0x18, 0xd8, 0x60, 0x25, 0x06, 0x21, 0x63, 0x2e, 0x76, 0x8f, 0xd4, 0xc4,
-	0x9c, 0x92, 0x8c, 0x2a, 0x22, 0x34, 0x41, 0x9c, 0xc5, 0xe0, 0x94, 0x70, 0xe2, 0xa1, 0x1c, 0xc3,
-	0x89, 0x47, 0x72, 0x8c, 0x17, 0x1e, 0xc9, 0x31, 0x3e, 0x78, 0x24, 0xc7, 0x38, 0xe1, 0xb1, 0x1c,
-	0xc3, 0x85, 0xc7, 0x72, 0x0c, 0x37, 0x1e, 0xcb, 0x31, 0x44, 0x39, 0x91, 0x17, 0x28, 0xd6, 0x48,
-	0x36, 0x25, 0xb1, 0x81, 0xd5, 0x19, 0x03, 0x02, 0x00, 0x00, 0xff, 0xff, 0x4f, 0x76, 0x7a, 0x15,
-	0x61, 0x01, 0x00, 0x00,
+	0xc0, 0xa8, 0xc1, 0x19, 0x04, 0x66, 0x1b, 0x55, 0x71, 0x09, 0x38, 0x06, 0x78, 0x06, 0x83, 0x35,
+	0x05, 0x43, 0xec, 0x10, 0x32, 0xe6, 0x62, 0xf7, 0x48, 0x4d, 0xcc, 0x29, 0xc9, 0xa8, 0x12, 0x12,
+	0xd2, 0x43, 0x32, 0x52, 0x0f, 0x6c, 0x9e, 0x14, 0x16, 0x31, 0x25, 0x06, 0x21, 0x43, 0x2e, 0x56,
+	0xf7, 0xd4, 0x12, 0xcf, 0x00, 0x22, 0xb4, 0x80, 0x5d, 0xa3, 0xc4, 0xe0, 0x94, 0x70, 0xe2, 0xa1,
+	0x1c, 0xc3, 0x89, 0x47, 0x72, 0x8c, 0x17, 0x1e, 0xc9, 0x31, 0x3e, 0x78, 0x24, 0xc7, 0x38, 0xe1,
+	0xb1, 0x1c, 0xc3, 0x85, 0xc7, 0x72, 0x0c, 0x37, 0x1e, 0xcb, 0x31, 0x44, 0x39, 0x91, 0x17, 0x28,
+	0xd6, 0x48, 0x36, 0x25, 0xb1, 0x81, 0xd5, 0x19, 0x03, 0x02, 0x00, 0x00, 0xff, 0xff, 0xe3, 0x8d,
+	0x25, 0xf8, 0x61, 0x01, 0x00, 0x00,
 }
 
 func (m *Empty) XSize() (n int) {
@@ -436,112 +436,112 @@ var (
 	ErrUnexpectedEndOfGroupApiserver = fmt.Errorf("proto: unexpected end of group")
 )
 
-// ApiserverServiceClient is the client API for ApiserverService service.
+// APIServerServiceClient is the client API for APIServerService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type ApiserverServiceClient interface {
-	// +gen:get=/api/v1/getIP
-	GetIP(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*IPRsp, error)
+type APIServerServiceClient interface {
 	// +gen:get=/api/v1/healthz
 	Healthz(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error)
+	// +gen:get=/api/v1/getIP
+	GetIP(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*IPRsp, error)
 }
 
-type apiserverServiceClient struct {
+type aPIServerServiceClient struct {
 	cc *grpc.ClientConn
 }
 
-func NewApiserverServiceClient(cc *grpc.ClientConn) ApiserverServiceClient {
-	return &apiserverServiceClient{cc}
+func NewAPIServerServiceClient(cc *grpc.ClientConn) APIServerServiceClient {
+	return &aPIServerServiceClient{cc}
 }
 
-func (c *apiserverServiceClient) GetIP(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*IPRsp, error) {
-	out := new(IPRsp)
-	err := c.cc.Invoke(ctx, "/apiserverv1.ApiserverService/GetIP", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiserverServiceClient) Healthz(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
+func (c *aPIServerServiceClient) Healthz(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, "/apiserverv1.ApiserverService/Healthz", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/apiserverv1.APIServerService/Healthz", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ApiserverServiceServer is the server API for ApiserverService service.
-type ApiserverServiceServer interface {
-	// +gen:get=/api/v1/getIP
-	GetIP(context.Context, *Empty) (*IPRsp, error)
+func (c *aPIServerServiceClient) GetIP(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*IPRsp, error) {
+	out := new(IPRsp)
+	err := c.cc.Invoke(ctx, "/apiserverv1.APIServerService/GetIP", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// APIServerServiceServer is the server API for APIServerService service.
+type APIServerServiceServer interface {
 	// +gen:get=/api/v1/healthz
 	Healthz(context.Context, *Empty) (*Empty, error)
+	// +gen:get=/api/v1/getIP
+	GetIP(context.Context, *Empty) (*IPRsp, error)
 }
 
-// UnimplementedApiserverServiceServer can be embedded to have forward compatible implementations.
-type UnimplementedApiserverServiceServer struct {
+// UnimplementedAPIServerServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedAPIServerServiceServer struct {
 }
 
-func (*UnimplementedApiserverServiceServer) GetIP(ctx context.Context, req *Empty) (*IPRsp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetIP not implemented")
-}
-func (*UnimplementedApiserverServiceServer) Healthz(ctx context.Context, req *Empty) (*Empty, error) {
+func (*UnimplementedAPIServerServiceServer) Healthz(ctx context.Context, req *Empty) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Healthz not implemented")
 }
-
-func RegisterApiserverServiceServer(s *grpc.Server, srv ApiserverServiceServer) {
-	s.RegisterService(&_ApiserverService_serviceDesc, srv)
+func (*UnimplementedAPIServerServiceServer) GetIP(ctx context.Context, req *Empty) (*IPRsp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetIP not implemented")
 }
 
-func _ApiserverService_GetIP_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func RegisterAPIServerServiceServer(s *grpc.Server, srv APIServerServiceServer) {
+	s.RegisterService(&_APIServerService_serviceDesc, srv)
+}
+
+func _APIServerService_Healthz_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ApiserverServiceServer).GetIP(ctx, in)
+		return srv.(APIServerServiceServer).Healthz(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/apiserverv1.ApiserverService/GetIP",
+		FullMethod: "/apiserverv1.APIServerService/Healthz",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiserverServiceServer).GetIP(ctx, req.(*Empty))
+		return srv.(APIServerServiceServer).Healthz(ctx, req.(*Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ApiserverService_Healthz_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _APIServerService_GetIP_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ApiserverServiceServer).Healthz(ctx, in)
+		return srv.(APIServerServiceServer).GetIP(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/apiserverv1.ApiserverService/Healthz",
+		FullMethod: "/apiserverv1.APIServerService/GetIP",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiserverServiceServer).Healthz(ctx, req.(*Empty))
+		return srv.(APIServerServiceServer).GetIP(ctx, req.(*Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-var _ApiserverService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "apiserverv1.ApiserverService",
-	HandlerType: (*ApiserverServiceServer)(nil),
+var _APIServerService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "apiserverv1.APIServerService",
+	HandlerType: (*APIServerServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetIP",
-			Handler:    _ApiserverService_GetIP_Handler,
+			MethodName: "Healthz",
+			Handler:    _APIServerService_Healthz_Handler,
 		},
 		{
-			MethodName: "Healthz",
-			Handler:    _ApiserverService_Healthz_Handler,
+			MethodName: "GetIP",
+			Handler:    _APIServerService_GetIP_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

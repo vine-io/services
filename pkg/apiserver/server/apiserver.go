@@ -64,7 +64,7 @@ func (s *server) Init() error {
 		return err
 	}
 
-	if err = pb.RegisterApiserverServiceHandler(s.Service.Server(), s); err != nil {
+	if err = pb.RegisterAPIServerServiceHandler(s.Service.Server(), s); err != nil {
 		return err
 	}
 
