@@ -23,9 +23,9 @@
 package main
 
 import (
-	"github.com/vine-io/services/pkg/apiserver"
+	"github.com/vine-io/services/apiserver/pkg"
 )
 
 func main() {
-	apiserver.Run()
+	pkg.Run()
 }

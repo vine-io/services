@@ -20,43 +20,42 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-package service
+package handler
 
 import (
-	"github.com/vine-io/services/pkg/runtime/inject"
+	pb "github.com/vine-io/services/api/service/apiserver/v1"
+	"github.com/vine-io/services/apiserver"
+	"github.com/vine-io/services/pkg/runtime"
 	"github.com/vine-io/vine"
 )
 
-func init() {
-	inject.ProvidePanic(new(apiserver))
+type handler struct {
+	vine.Service
 }
 
-type Apiserver interface {
-	Init() error
-	Call()
-	Stream()
-	PingPong()
+func (h *handler) Init() error {
+	var err error
+
+	opts := []vine.Option{
+		vine.Name(apiserver.Name),
+		vine.Id(apiserver.Id),
+		vine.Version(runtime.GetVersion()),
+		vine.Metadata(map[string]string{
+			"namespace": apiserver.Namespace,
+		}),
+	}
+
+	h.Service.Init(opts...)
+
+	if err = pb.RegisterAPIServerServiceHandler(h.Service.Server(), h); err != nil {
+		return err
+	}
+
+	return err
 }
 
-var _ Apiserver = (*apiserver)(nil)
-
-type apiserver struct {
-	vine.Service `inject:""`
-}
-
-func (s *apiserver) Init() error {
-	return nil
-}
-
-func (s *apiserver) Call() {
-	// FIXME: modify method
-	panic("implement me")
-}
-
-func (s *apiserver) Stream() {
-	panic("implement me")
-}
-
-func (s *apiserver) PingPong() {
-	panic("implement me")
+func New() *handler {
+	return &handler{
+		Service: vine.NewService(),
+	}
 }

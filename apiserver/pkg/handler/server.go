@@ -20,15 +20,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-package dao
+package handler
 
 import (
-	"github.com/vine-io/services/pkg/runtime/inject"
-	"github.com/vine-io/vine/util/runtime"
+	"context"
+
+	pb "github.com/vine-io/services/api/service/apiserver/v1"
+	"google.golang.org/grpc/peer"
 )
 
-func init() {
-	_ = inject.Provide(sets)
+func (h *handler) Healthz(ctx context.Context, _ *pb.Empty, _ *pb.Empty) error {
+	return nil
 }
 
-var sets = runtime.NewSchemaSet()
+func (h *handler) GetIP(ctx context.Context, _ *pb.Empty, rsp *pb.IPRsp) error {
+	pr, ok := peer.FromContext(ctx)
+	if ok {
+		rsp.Addr = pr.Addr.String()
+	}
+	return nil
+}

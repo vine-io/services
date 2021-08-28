@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package apiserverv1;
 
-option go_package = "github.com/vine-io/services/proto/service/apiserver/v1;apiserverv1";
+option go_package = "github.com/vine-io/services/api/service/apiserver/v1;apiserverv1";
 
 // +gen:openapi
 service APIServerService {

@@ -20,32 +20,37 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-package apiserver
+package client
 
 import (
 	"context"
 
-	"github.com/vine-io/services/pkg/runtime"
-	pb "github.com/vine-io/services/proto/service/apiserver/v1"
+	pb "github.com/vine-io/services/api/service/apiserver/v1"
+	"github.com/vine-io/services/apiserver"
 	"github.com/vine-io/vine/core/client"
 )
 
-type Client struct {
+type Client interface {
+	Healthz(ctx context.Context, opts ...client.CallOption) error
+	GetIP(ctx context.Context, opts ...client.CallOption) (string, error)
+}
+
+type SimpleClient struct {
 	cc pb.APIServerService
 }
 
-func NewClient(conn client.Client) *Client {
-	return &Client{
-		cc: pb.NewAPIServerService(runtime.ApiserverName, conn),
+func NewClient(conn client.Client) *SimpleClient {
+	return &SimpleClient{
+		cc: pb.NewAPIServerService(apiserver.Name, conn),
 	}
 }
 
-func (c *Client) Healthz(ctx context.Context, opts ...client.CallOption) error {
+func (c *SimpleClient) Healthz(ctx context.Context, opts ...client.CallOption) error {
 	_, err := c.cc.Healthz(ctx, &pb.Empty{}, opts...)
 	return err
 }
 
-func (c *Client) GetIP(ctx context.Context, opts ...client.CallOption) (string, error) {
+func (c *SimpleClient) GetIP(ctx context.Context, opts ...client.CallOption) (string, error) {
 	rsp, err := c.cc.GetIP(ctx, &pb.Empty{}, opts...)
 	if err != nil {
 		return "", err

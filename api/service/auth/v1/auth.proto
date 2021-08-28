@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package authv1;
 
-option go_package = "github.com/vine-io/services/proto/service/auth/v1;authv1";
+option go_package = "github.com/vine-io/services/api/service/auth/v1;authv1";
 
 // +gen:openapi
 service AuthService {

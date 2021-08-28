@@ -20,16 +20,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-package apiserver
+package pkg
 
 import (
 	log "github.com/vine-io/vine/lib/logger"
 
-	"github.com/vine-io/services/pkg/apiserver/server"
+	"github.com/vine-io/services/apiserver/pkg/handler"
 )
 
 func Run() {
-	app := server.New()
+	app := handler.New()
 
 	if err := app.Init(); err != nil {
 		log.Fatal(err)
