@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/vine-io/services/pkg/auth"
+	"github.com/vine-io/services/auth/pkg"
 )
 
 func main() {
-	auth.Run()
+	pkg.Run()
 }

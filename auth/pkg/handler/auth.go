@@ -1,27 +1,22 @@
-package server
+package handler
 
 import (
 	"context"
 
+	"github.com/vine-io/services/auth"
 	"github.com/vine-io/vine"
 	log "github.com/vine-io/vine/lib/logger"
 
-	"github.com/vine-io/services/pkg/auth/service"
-	"github.com/vine-io/services/pkg/runtime"
-	"github.com/vine-io/services/pkg/runtime/inject"
-	pb "github.com/vine-io/services/proto/service/auth/v1"
+	pb "github.com/vine-io/services/api/service/auth/v1"
 )
 
 type server struct {
 	vine.Service
-
-	H service.Auth `inject:""`
 }
 
 // Call is a single request handler called via client.Call or the generated client code
 func (s *server) Call(ctx context.Context, req *pb.Request, rsp *pb.Response) error {
 	// TODO: Validate
-	s.H.Call()
 	// FIXME: fix call method
 	log.Info("Received Auth.Call request")
 	rsp.Msg = "Hello " + req.Name
@@ -33,7 +28,6 @@ func (s *server) Stream(ctx context.Context, req *pb.StreamingRequest, stream pb
 	log.Infof("Received Auth.Stream request with count: %d", req.Count)
 
 	// TODO: Validate
-	s.H.Stream()
 	// FIXME: fix stream method
 
 	for i := 0; i < int(req.Count); i++ {
@@ -51,7 +45,6 @@ func (s *server) Stream(ctx context.Context, req *pb.StreamingRequest, stream pb
 // PingPong is a bidirectional stream handler called via client.Stream or the generated client code
 func (s *server) PingPong(ctx context.Context, stream pb.AuthService_PingPongStream) error {
 	// TODO: Validate
-	s.H.PingPong()
 	// FIXME: fix stream pingpong
 
 	for {
@@ -70,29 +63,15 @@ func (s *server) Init() error {
 	var err error
 
 	opts := []vine.Option{
-		vine.Name(runtime.AuthName),
-		vine.Id(runtime.AuthId),
-		vine.Version(runtime.GetVersion()),
+		vine.Name(auth.Name),
+		vine.Id(auth.Id),
+		vine.Version(auth.GetVersion()),
 		vine.Metadata(map[string]string{
-			"namespace": runtime.Namespace,
+			"namespace": auth.Namespace,
 		}),
 	}
 
 	s.Service.Init(opts...)
-
-	if err = inject.Provide(s.Service, s.Client(), s); err != nil {
-		return err
-	}
-
-	// TODO: inject more objects
-
-	if err = inject.Populate(); err != nil {
-		return err
-	}
-
-	if err = s.H.Init(); err != nil {
-		return err
-	}
 
 	if err = pb.RegisterAuthServiceHandler(s.Service.Server(), s); err != nil {
 		return err

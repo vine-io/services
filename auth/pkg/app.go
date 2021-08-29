@@ -1,13 +1,13 @@
-package auth
+package pkg
 
 import (
 	log "github.com/vine-io/vine/lib/logger"
 
-	"github.com/vine-io/services/pkg/auth/server"
+	"github.com/vine-io/services/auth/pkg/handler"
 )
 
 func Run() {
-	app := server.New()
+	app := handler.New()
 
 	if err := app.Init(); err != nil {
 		log.Fatal(err)

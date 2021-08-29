@@ -25,7 +25,6 @@ package handler
 import (
 	pb "github.com/vine-io/services/api/service/apiserver/v1"
 	"github.com/vine-io/services/apiserver"
-	"github.com/vine-io/services/pkg/runtime"
 	"github.com/vine-io/vine"
 )
 
@@ -39,7 +38,7 @@ func (h *handler) Init() error {
 	opts := []vine.Option{
 		vine.Name(apiserver.Name),
 		vine.Id(apiserver.Id),
-		vine.Version(runtime.GetVersion()),
+		vine.Version(apiserver.GetVersion()),
 		vine.Metadata(map[string]string{
 			"namespace": apiserver.Namespace,
 		}),
