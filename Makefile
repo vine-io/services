@@ -10,7 +10,7 @@ build-tag:
 	sed -i "" "s/GitCommit  = ".*"/GitCommit  = \"$(GIT_COMMIT)\"/g" pkg/runtime/doc.go
 	sed -i "" "s/BuildDate  = ".*"/BuildDate  = \"$(BUILD_DATE)\"/g" pkg/runtime/doc.go
 
-proto: proto-apiserver proto-auth
+proto: proto-apiserver proto-auth proto-broker proto-registry proto-config
 
 proto-apiserver:
 	cd $(GOPATH)/src && \
@@ -19,6 +19,18 @@ proto-apiserver:
 proto-auth:
 	cd $(GOPATH)/src && \
 	protoc -I=$(GOPATH)/src --gogo_out=:. --vine_out=:. --validator_out=:. github.com/vine-io/services/api/service/auth/v1/auth.proto
+
+proto-broker:
+	cd $(GOPATH)/src && \
+	protoc -I=$(GOPATH)/src --gogo_out=:. --vine_out=:. --validator_out=:. github.com/vine-io/services/api/service/broker/v1/broker.proto
+
+proto-registry:
+	cd $(GOPATH)/src && \
+	protoc -I=$(GOPATH)/src --gogo_out=:. --vine_out=:. --validator_out=:. github.com/vine-io/services/api/service/registry/v1/registry.proto
+
+proto-config:
+	cd $(GOPATH)/src && \
+	protoc -I=$(GOPATH)/src --gogo_out=:. --vine_out=:. --validator_out=:. github.com/vine-io/services/api/service/config/v1/config.proto
 
 install:
 
