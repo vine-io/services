@@ -24,6 +24,7 @@ package handler
 
 import (
 	"context"
+	"strings"
 
 	pb "github.com/vine-io/services/api/service/apiserver/v1"
 	"google.golang.org/grpc/peer"
@@ -36,7 +37,11 @@ func (h *handler) Healthz(ctx context.Context, _ *pb.Empty, _ *pb.Empty) error {
 func (h *handler) GetIP(ctx context.Context, _ *pb.Empty, rsp *pb.IPRsp) error {
 	pr, ok := peer.FromContext(ctx)
 	if ok {
-		rsp.Addr = pr.Addr.String()
+		addr := pr.Addr.String()
+		if index := strings.LastIndex(addr, ":"); index > 1 {
+			addr = addr[0:index]
+		}
+		rsp.Addr = addr
 	}
 	return nil
 }
